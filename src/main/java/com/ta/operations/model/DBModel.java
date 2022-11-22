@@ -1,23 +1,23 @@
 package com.ta.operations.model;
 
-public class Tutorial {
+public class DBModel {
 
 	  private long id;
 	  private String title;
 	  private String descriptions;
 	  private boolean published;
-	  public Tutorial() {
+	  public DBModel() {
 
 	  }
 	  
-	  public Tutorial(long id, String title, String descriptions, boolean published) {
+	  public DBModel(long id, String title, String descriptions, boolean published) {
 	    this.id = id;
 	    this.title = title;
 	    this.descriptions = descriptions;
 	    this.published = published;
 	  }
 
-	  public Tutorial(String title, String descriptions, boolean published) {
+	  public DBModel(String title, String descriptions, boolean published) {
 	    this.title = title;
 	    this.descriptions = descriptions;
 	    this.published = published;
@@ -57,7 +57,7 @@ public class Tutorial {
 
 	  @Override
 	  public String toString() {
-	    return "Tutorial [id=" + id + ", title=" + title + ", desc=" + descriptions + ", published=" + published + "]";
+	    return "DBModel [id=" + id + ", title=" + title + ", desc=" + descriptions + ", published=" + published + "]";
 	  }
 
 	}

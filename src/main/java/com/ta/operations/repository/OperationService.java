@@ -8,35 +8,35 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.ta.operations.model.Tutorial;
+import com.ta.operations.model.DBModel;
 
 
 
 @Repository
-public class OperationService implements TutorialRepository {
+public class OperationService implements DBRepository {
 
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
   @Override
-  public int save(Tutorial tutorial) {
-    return jdbcTemplate.update("INSERT INTO tutorials (title, description, published) VALUES(?,?,?)",
-        new Object[] { tutorial.getTitle(), tutorial.getDescriptions(), tutorial.isPublished() });
+  public int save(DBModel DBModel) {
+    return jdbcTemplate.update("INSERT INTO DBModels (title, description, published) VALUES(?,?,?)",
+        new Object[] { DBModel.getTitle(), DBModel.getDescriptions(), DBModel.isPublished() });
   }
 
   @Override
-  public int update(Tutorial tutorial) {
-    return jdbcTemplate.update("UPDATE tutorials SET title=?, description=?, published=? WHERE id=?",
-        new Object[] { tutorial.getTitle(), tutorial.getDescriptions(), tutorial.isPublished(), tutorial.getId() });
+  public int update(DBModel DBModel) {
+    return jdbcTemplate.update("UPDATE DBModels SET title=?, description=?, published=? WHERE id=?",
+        new Object[] { DBModel.getTitle(), DBModel.getDescriptions(), DBModel.isPublished(), DBModel.getId() });
   }
 
   @Override
-  public Tutorial findById(Long id) {
+  public DBModel findById(Long id) {
     try {
-      Tutorial tutorial = jdbcTemplate.queryForObject("SELECT * FROM tutorials WHERE id=?",
-          BeanPropertyRowMapper.newInstance(Tutorial.class), id);
+      DBModel DBModel = jdbcTemplate.queryForObject("SELECT * FROM DBModels WHERE id=?",
+          BeanPropertyRowMapper.newInstance(DBModel.class), id);
 
-      return tutorial;
+      return DBModel;
     } catch (IncorrectResultSizeDataAccessException e) {
       return null;
     }
@@ -44,29 +44,29 @@ public class OperationService implements TutorialRepository {
 
   @Override
   public int deleteById(Long id) {
-    return jdbcTemplate.update("DELETE FROM tutorials WHERE id=?", id);
+    return jdbcTemplate.update("DELETE FROM DBModels WHERE id=?", id);
   }
 
   @Override
-  public List<Tutorial> findAll() {
-    return jdbcTemplate.query("SELECT * from tutorials", BeanPropertyRowMapper.newInstance(Tutorial.class));
+  public List<DBModel> findAll() {
+    return jdbcTemplate.query("SELECT * from DBModels", BeanPropertyRowMapper.newInstance(DBModel.class));
   }
 
   @Override
-  public List<Tutorial> findByPublished(boolean published) {
-    return jdbcTemplate.query("SELECT * from tutorials WHERE published=?",
-        BeanPropertyRowMapper.newInstance(Tutorial.class), published);
+  public List<DBModel> findByPublished(boolean published) {
+    return jdbcTemplate.query("SELECT * from DBModels WHERE published=?",
+        BeanPropertyRowMapper.newInstance(DBModel.class), published);
   }
 
   @Override
-  public List<Tutorial> findByTitleContaining(String title) {
-    String q = "SELECT * from tutorials WHERE title LIKE '%" + title + "%'";
+  public List<DBModel> findByTitleContaining(String title) {
+    String q = "SELECT * from DBModels WHERE title LIKE '%" + title + "%'";
 
-    return jdbcTemplate.query(q, BeanPropertyRowMapper.newInstance(Tutorial.class));
+    return jdbcTemplate.query(q, BeanPropertyRowMapper.newInstance(DBModel.class));
   }
 
   @Override
   public int deleteAll() {
-    return jdbcTemplate.update("DELETE from tutorials");
+    return jdbcTemplate.update("DELETE from DBModels");
   }
 }
