@@ -1,0 +1,6 @@
+com\ta\operations\Controller\TutorialController.class
+com\ta\operations\repository\OperationService.class
+com\ta\operations\OperationsApplication.class
+com\ta\operations\repository\TutorialRepository.class
+com\ta\operations\ServletInitializer.class
+com\ta\operations\model\Tutorial.class
